@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive InfoHub - Sample Output with HTML Forms</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f7fb;
+            color: #222;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header, nav, section, article, aside, footer {
+            padding: 15px 20px;
+        }
+
+        header {
+            background-color: #004b8d;
+            color: #fff;
+        }
+
+        nav {
+            background-color: #e1e8f0;
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #004b8d;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .main-section {
+            flex: 3 1 250px;
+        }
+
+        .sidebar {
+            flex: 1 1 200px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px 20px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .code-block {
+            background-color: #222;
+            color: #e8e8e8;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        button.primary-btn {
+            background-color: #004b8d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;    
+        }
+
+        button.primary-btn:hover {
+            background-color: #0065c3;
+        }
+
+        button.reset-btn {
+            background-color: #555;
+            color: #ffffff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #004b8d;
+            color: #fff;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .hidden-message {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #006600;
+        }
+
+        form {
+            display: grid;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdbdbd;
+            border-radius: 5px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #004b8d;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .checkbox-group label,
+        .radio-group label {
+            font-weight: normal;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                flex-direction: column;
+            }
+
+            nav a {
+                display: inline-block;
+                margin-bottom: 6px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        function toggleMessage() {
+            const msg = document.getElementById("info-message");
+
+            if (msg.style.display === "block") {
+                msg.style.display = "none";
+            } else {
+                msg.style.display = "block";
+            }
+        }
+
+        function registerStudent(event) {
+            event.preventDefault();
+
+            const fullname = document.getElementById("fullname").value;
+
+            document.getElementById("form-result").innerHTML =
+                "✔ Registration Successful! Welcome, <b>" + fullname + "</b>.";
+
+            document.getElementById("event-form").reset();
+        }
+    </script>
+</head>
+
+<body id="page-root">
+    <div class="wrapper">
+
+        <header id="top-header" class="section-header">
+            <h1>Interactive InfoHub</h1>
+            <p>Advanced HTML Demonstration &#128526;</p>
+        </header>
+
+        <nav>
+            <a href="#layout">Layout</a>
+            <a href="#code">Code Samples</a>
+            <a href="#forms">Forms</a>
+            <a href="#symbols">Symbols & Emojis</a>
+            <a href="#xhtml">HTML vs XHTML</a>
+        </nav>
+
+        <div class="container">
+
+            <section class="main-section">
+
+                <article id="layout" class="card">
+                    <h2>1. Layout, Divs, Classes, IDs & Buttons</h2>
+
+                    <div class="info-box">
+                        <p>
+                            This <code>&lt;article&gt;</code> is wrapped inside a semantic
+                            <code>&lt;section&gt;</code>. We use a <strong>div-based layout</strong>
+                            with reusable classes like <code>.container</code>, <code>.card</code>, and a unique ID
+                            <code>#top-header</code> for the page header.
+                        </p>
+                    </div>
+
+                    <button class="primary-btn" onclick="toggleMessage()">Toggle Info Message</button>
+
+                    <p id="info-message" class="hidden-message">
+                        JavaScript is working! &#127881; You just toggled this message using a button.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h2>2. Embedded Content with Iframe</h2>
+                    <p>
+                        Below is an embedded YouTube video using an <code>&lt;iframe&gt;</code>.
+                        The iframe uses a relative width percentage to help responsiveness.
+                    </p>
+
+                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px;">
+                        <iframe
+                            style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                            src="https://www.youtube.com/embed/qz0aGYrrlhU?si=l3TdMHTcJTKbjxBc"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h2>3. File Paths and Relative Image</h2>
+                    <p>
+                        The image below is loaded from a <em>relative file path</em>:
+                        <code>images/profile.jpg</code>.
+                    </p>
+
+                    <img
+                        src="images/mark.jpg"
+                        alt="Sample profile photo"
+                        style="max-width: 160px; border-radius: 10%; border: 3px solid #004b8d;">
+                </article>
+
+                <article id="forms" class="card">
+                    <h2>4. HTML Forms</h2>
+
+                    <p>
+                        HTML forms allow users to submit information such as event registrations,
+                        login credentials, surveys, and feedback. HTML5 also provides built-in
+                        validation features that help ensure correct user input.
+                    </p>
+
+                    <form id="event-form" onsubmit="registerStudent(event)">
+
+                        <div class="form-row">
+                            <div>
+                                <label for="fullname">Full Name</label>
+                                <input
+                                    type="text"
+                                    id="fullname"
+                                    name="fullname"
+                                    placeholder="Enter your full name"
+                                    required
+                                    minlength="5">
+                            </div>
+
+                            <div>
+                                <label for="email">Email Address</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="example@gmail.com"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div>
+                                <label for="studentid">Student ID</label>
+                                <input
+                                    type="text"
+                                    id="studentid"
+                                    name="studentid"
+                                    placeholder="202600123"
+                                    required
+                                    pattern="[0-9]{9}"
+                                    title="Student ID should contain exactly 9 digits.">
+                            </div>
+
+                            <div>
+                                <label for="course">Course</label>
+                                <select id="course" name="course" required>
+                                    <option value="">Select Course</option>
+                                    <option value="BS Information Systems">BS Information Systems</option>
+                                    <option value="BS Computer Science">BS Computer Science</option>
+                                    <option value="BS Information Technology">BS Information Technology</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div>
+                                <label for="birthdate">Birthdate</label>
+                                <input
+                                    type="date"
+                                    id="birthdate"
+                                    name="birthdate"
+                                    required>
+                            </div>
+
+                            <div>
+                                <label for="arrival">Arrival Time</label>
+                                <input
+                                    type="time"
+                                    id="arrival"
+                                    name="arrival"
+                                    required>
+                            </div>
+                        </div>
+
+                        <label>Participant Type</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="participant_type" value="Student" required>
+                                Student
+                            </label>
+
+                            <label>
+                                <input type="radio" name="participant_type" value="Faculty">
+                                Faculty
+                            </label>
+
+                            <label>
+                                <input type="radio" name="participant_type" value="Guest">
+                                Guest
+                            </label>
+                        </div>
+
+                        <label>Activities to Join</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="activity" value="Coding Contest">
+                                Coding Contest
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="activity" value="Web Design">
+                                Web Design
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="activity" value="Robotics">
+                                Robotics
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="activity" value="Quiz Bowl">
+                                Quiz Bowl
+                            </label>
+                        </div>
+
+                        <label for="schoolid">Upload School ID</label>
+                        <input
+                            type="file"
+                            id="schoolid"
+                            name="schoolid"
+                            accept=".jpg,.jpeg,.png,.pdf">
+
+                        <label for="comments">Comments</label>
+                        <textarea
+                            id="comments"
+                            name="comments"
+                            rows="4"
+                            placeholder="Write your comments..."
+                            maxlength="300"></textarea>
+
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button class="primary-btn" type="submit">
+                                Submit Registration
+                            </button>
+
+                            <button class="reset-btn" type="reset">
+                                Reset Form
+                            </button>
+                        </div>
+
+                        <p id="form-result" class="success"></p>
+
+                    </form>
+                </article>
+
+                <article id="code" class="card">
+                    <h2>5. Computer Code Tags</h2>
+                    <p>We can show code and computer-related text using special tags:</p>
+
+                    <div class="code-block">
+<pre><code>&lt;pre&gt; and &lt;code&gt; show preformatted code:
+
+function hello() {
+    console.log("Hello, world!");
+}
+</code></pre>
+                    </div>
+
+                    <p>
+                        Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save your file.
+                        Program output example using <code>&lt;samp&gt;</code>:
+                        <samp>Build successful. No errors found.</samp>
+                    </p>
+                </article>
+
+                <article id="symbols" class="card">
+                    <h2>6. Entities, Symbols, Emojis & URL Encoding</h2>
+
+                    <p>
+                        HTML <strong>entities</strong> and <strong>symbols</strong>:
+                        &copy; 2026 InfoHub &mdash; All rights reserved.
+                        Heart symbol: &hearts;
+                        Check symbol: &#10003; (✓)
+                    </p>
+
+                    <p>
+                        Emojis add expression: &#128516;&#128640;&#127793;
+                    </p>
+
+                    <p>
+                        Example of a URL-encoded search query:
+                    </p>
+
+                    <div class="code-block">
+                        <code>https://example.com/search?query=HTML%20Advanced%20Topics%21</code>
+                    </div>
+                </article>
+
+                <article id="xhtml" class="card">
+                    <h2>7. HTML vs XHTML</h2>
+
+                    <p>Below is a simple comparison of HTML and XHTML syntax:</p>
+
+                    <div class="code-block">
+<pre><code>&lt;!-- HTML version not self-closed --&gt;
+&lt;img src="images/profile.jpg" alt="Profile image"&gt;
+
+&lt;!-- XHTML-style version self-closed, lowercase, quoted attributes --&gt;
+&lt;img src="images/profile.jpg" alt="Profile image" /&gt;
+</code></pre>
+                    </div>
+
+                    <p>
+                        XHTML is stricter and requires properly closed tags, lowercase names, and quoted attributes.
+                    </p>
+                </article>
+
+            </section>
+
+            <aside class="sidebar">
+                <h3>Quick Info Panel</h3>
+
+                <p>
+                    This <code>&lt;aside&gt;</code> acts as a sidebar. It demonstrates
+                    how semantic tags improve layout and meaning.
+                </p>
+
+                <p>
+                    This page follows a simple <strong>style guide</strong>:
+                    lowercase tag names, consistent indentation, semantic elements,
+                    meaningful class and ID names, and UTF-8 charset.
+                </p>
+
+                <p>
+                    Character encoding is defined using:
+                </p>
+
+                <div class="code-block">
+                    <code>&lt;meta charset="UTF-8"&gt;</code>
+                </div>
+            </aside>
+
+        </div>
+
+        <footer>
+            <p>
+                Built with advanced HTML Concepts &middot; InfoHub Sample &nbsp;&starf; &nbsp; &copy; 2026
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>
